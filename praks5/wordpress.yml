@@ -32,17 +32,17 @@
         owner: www-data
         group: www-data
 
-    - name: kopeerime sample konfiguratsiooni ja teeme yhe juurde, mida hakkame kasutama
+- name: kopeerime sample konfiguratsiooni ja teeme yhe juurde, mida hakkame kasutama
       command: cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
 
     - name: vahetame parooli vaartuse konf failis
-      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="password_here" line="define('DB_PA>
+      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="password_here" line="define('DB_PASSWORD', 'BarackObama12');"
 
     - name: vahetame kasutaja vaartuse konf failis
-      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="username_here" line="define('DB_US>
+      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="username_here" line="define('DB_USER', 'wpuser');"
 
     - name: vahetame andmebaasi nime vaartuse konf failis
-      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="database_name_here" line="define('>
+      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="database_name_here" line="define('DB_NAME', 'wpdatabase');"
 
     - name: teeme teenusele apache2 restarti
       service: name=apache2 state=restarted
