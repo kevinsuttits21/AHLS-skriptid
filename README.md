@@ -20,7 +20,7 @@ Seal samas lingis on ka leitav, kuidas paigaldada Ansible server.
 # Windows tugi?
 Windowsis on võimalik bash scripte käivitada WSL-i abil.
 
-Samuti on võimalik, ka kasutada Playbook'e Windows seadmete vastu kasutades tarkvara Ansible. Selle jaoks on dokumentatsioon loodud siin: https://docs.ansible.com/ansible/latest/os_guide/windows_usage.html
+Samuti on võimalik ka kasutada Playbook'e Windows seadmete vastu kasutades tarkvara Ansible. Selle jaoks on dokumentatsioon loodud siin: https://docs.ansible.com/ansible/latest/os_guide/windows_usage.html
 
 
 Siin saad abi sellega, kuidas  installeerida WSL-i oma Windows masinale: https://github.com/MicrosoftDocs/wsl/blob/main/WSL/install-manual.md
