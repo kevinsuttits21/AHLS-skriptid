@@ -14,13 +14,23 @@ Võimalik on ka nii, et oma tehtud faili või alla laetud faili ei saa kasutada,
 chmod u+x (skripti täisasukoht või kui oled seal kataloogis juba, siis ainult skripti nimi)
 ```
 # Kuidas kasutada .yml faile Playbook'idena tarkvaras Ansible?
-Tugi jaoks on olemas Ansible poolt loodud dokumentatsioon siin: https://docs.ansible.com/ansible/latest/network/getting_started/first_playbook.html
+Tugi jaoks on olemas Ansible tarkvaraarendajate poolt loodud dokumentatsioon siin: https://docs.ansible.com/ansible/latest/network/getting_started/first_playbook.html
 
 Seal samas lingis on ka leitav, kuidas paigaldada Ansible server.
 # Windows tugi?
 Windowsis on võimalik bash scripte käivitada WSL-i abil.
 
+Samuti on võimalik, ka kasutada Playbook'e Windows seadmete vastu kasutades tarkvara Ansible. Selle jaoks on dokumentatsioon loodud siin: https://docs.ansible.com/ansible/latest/os_guide/windows_usage.html
+
+
 Siin saad abi sellega, kuidas  installeerida WSL-i oma Windows masinale: https://github.com/MicrosoftDocs/wsl/blob/main/WSL/install-manual.md
+
+# Hetkesed tingimused
+* Playbook'id on testitud vaid **Debian 11** klientmasinatel.
+* Ansible-server oli installeeritud **Debian 12** masinal.
+* Klientmasinatel peab olema loodud kasutaja **`kasutaja`**.
+* Rooti kasutaja parooliks seadistatakse skriptides/playbook'ides **`BarackObama12`**.
+* Kõik skriptid ja playbook'id käivita **`root`** kasutajas!
 
 # Praktikumid (.sh kui ka .yml failid)
 ### praks1
