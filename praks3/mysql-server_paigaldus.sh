@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # rangelt soovitatud kaivitada root kasutajana
-# antud skript kontrollib, kas mysql-server on paigaldatud susteemi ja kui on siis teavitab sellest, mu>
+# antud skript kontrollib, kas mysql-server on paigaldatud susteemi ja kui on siis teavitab sellest, muidu paigaldab
 if apt list --installed "mysql-server" 2>/dev/null | grep -q "mysql-server" > /dev/null 2>&1; then
      echo "Teenus on juba olemas susteemis. Lisaks on olemas ka teised abipaketid!"
      systemctl status mysql
