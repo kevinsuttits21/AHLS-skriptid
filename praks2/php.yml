@@ -1,0 +1,6 @@
+
+---
+- hosts: webservers
+  tasks:
+    - name: paigaldame php (hetkese versiooniga)
+      apt: name=php update_cache=yes state=latest

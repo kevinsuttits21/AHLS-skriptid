@@ -1,0 +1,48 @@
+
+---
+- hosts: webservers
+  tasks:
+    - name:  loome andmebaas wordpressi jaoks
+      mysql_db:
+        name: wpdatabase
+        state: present
+
+    - name: loome kasutaja koos parooliga koos oigustega
+      mysql_user:
+        name: wpuser
+        password: BarackObama12
+        priv: 'wpdatabase.*:ALL,GRANT'
+        state: present
+        check_implicit_admin: yes
+
+    - name: alglaadimine mysql
+      service: name=mysql state=restarted
+
+    - name: laeme alla ja pakime lahti wordpressi
+      unarchive:
+        src: https://wordpress.org/latest.tar.gz
+        dest: /var/www/html/
+        remote_src: yes
+
+    - name: vahetame wordpress kasuta omanikuks ja grupiks www-data
+      file:
+        path: /var/www/html/wordpress/
+        state: directory
+        recurse: yes
+        owner: www-data
+        group: www-data
+
+    - name: kopeerime sample konfiguratsiooni ja teeme yhe juurde, mida hakkame kasutama
+      command: cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php
+
+    - name: vahetame parooli vaartuse konf failis
+      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="password_here" line="define('DB_PA>
+
+    - name: vahetame kasutaja vaartuse konf failis
+      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="username_here" line="define('DB_US>
+
+    - name: vahetame andmebaasi nime vaartuse konf failis
+      lineinfile: dest=/var/www/html/wordpress/wp-config.php regexp="database_name_here" line="define('>
+
+    - name: teeme teenusele apache2 restarti
+      service: name=apache2 state=restarted

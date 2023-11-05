@@ -1,0 +1,50 @@
+
+---
+- hosts: webservers
+  tasks:
+  - name: loome allalaadimiseks eraldi kataloog
+    file:
+      path=/root/allalaadimised
+      owner=root
+      group=root
+      mode=0755
+      state=directory
+
+  - name: laeme alla mysql-serveri repo apt-i lisamiseks
+    get_url:
+      url: https://repo.mysql.com/mysql-apt-config_0.8.26-1_all.deb
+      dest: "/root/allalaadimised"
+      mode: 0440
+
+  - name: installeerime mysql repo
+    apt: "deb=/root/allalaadimised/mysql-apt-config_0.8.26-1_all.deb"
+
+  - name: installeerime mysql
+    apt: name=mysql-server update_cache=yes state=present
+
+  - name: paigaldame python3-pymysql ansible jaoks
+    apt: name=python3-pymysql update_cache=yes state=latest
+
+  - name: loome root login faili
+    copy:
+      dest: /root/.my.cnf
+      owner: root
+      group: root
+      mode: 0600
+      content: |
+        [client]
+        user=root
+        password=BarackObama12
+
+  - name: loome kasutaja parooliga koos koikide privileegidega
+    mysql_user:
+      name: root
+      password: BarackObama12
+      login_user: root
+      login_password: BarackObama12
+      priv: '*.*:ALL,GRANT'
+      state: present
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+
+  - name: teeme taaskaivituse mysql-ile
+    service: name=mysql state=restarted

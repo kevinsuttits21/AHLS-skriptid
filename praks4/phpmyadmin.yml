@@ -1,0 +1,26 @@
+
+---
+- hosts: webservers
+  tasks:
+    - name: debconf
+      debconf: name=phpmyadmin question='phpmyadmin/reconfigure-webserver' value='apache2' vtype='multiselect'
+
+    - name: debconf
+      debconf: name=phpmyadmin question='phpmyadmin/dbconfig-install' value='true' vtype='boolean'
+
+    - name: debconf
+      debconf: name=phpmyadmin question='phpmyadmin/app-password-confirm' value='BarackObama12' vtype='password'
+
+    - name: debconf
+      debconf: name=phpmyadmin question='phpmyadmin/mysql/admin-pass' value='BarackObama12' vtype='password'
+
+    - name: debconf
+      debconf: name=phpmyadmin question='phpmyadmin/mysql/app-pass' value='BarackObama12' vtype='password'
+
+    - name: paigaldame phpmyadmin
+      apt: name=phpmyadmin update_cache=yes state=latest
+
+    - name: restartime apache2 teenuse
+      service:
+        name: apache2
+        state: restarted
